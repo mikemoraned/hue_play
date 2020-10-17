@@ -1,3 +1,8 @@
+extern crate hueclient;
+use hueclient::bridge::Bridge;
+
+#[allow(dead_code)]
 fn main() {
-    println!("Hello, world!");
+    let bridge = Bridge::discover().unwrap();
+    println!("Hue bridge found: {:?}", bridge);
 }
