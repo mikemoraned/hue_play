@@ -1,5 +1,4 @@
 extern crate hueclient;
-use dotenv;
 use hueclient::bridge::Bridge;
 fn main() {
     let username = dotenv::var("USERNAME").unwrap();
