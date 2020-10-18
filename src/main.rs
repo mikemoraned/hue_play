@@ -57,4 +57,24 @@ fn main() {
             ::std::process::exit(2)
         }
     }
+
+    match bridge.get_all_lights() {
+        Ok(lights) => {
+            for ref l in lights.iter() {
+                if l.light.name == "Hue lightstrip plus 1" {
+                    println!("Found: {:?}", l.light);
+                    let toggle_command = if l.light.state.on {
+                        hueclient::bridge::CommandLight::default().off()
+                    } else {
+                        hueclient::bridge::CommandLight::default().on()
+                    };
+                    println!("{:?}", bridge.set_light_state(l.id, &toggle_command));
+                }
+            }
+        }
+        Err(err) => {
+            println!("Error: {}", err);
+            ::std::process::exit(2)
+        }
+    };
 }
